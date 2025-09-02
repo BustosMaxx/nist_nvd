@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import time
 from typing import List
 
-def extract(fecha_from, fecha_to):
+def extract(fecha_from, fecha_to, inventario_path):
     '''
     Busco la lista de los CVE por un rango de fecha.
     Armo la tabla con Pandas.
@@ -16,6 +16,7 @@ def extract(fecha_from, fecha_to):
     Args:
         fecha_from (Date): Fecha inicio
         fecha_to (Date): Fecha final
+        marca_modelo (Dataframe): Planilla con la lista de tecnologías
 
     Returns:
         None
@@ -116,23 +117,22 @@ def extract(fecha_from, fecha_to):
     data['CVSS_2'] = severity_cvssv2
     data['Description'] = cve_description_list
 
-    marca_modelo = read_inventario()
-
+    marca_modelo = read_inventario(inventario_path)
+    
     cve_high_critical = buscar_en_inventario(data, marca_modelo)
 
     load(cve_high_critical)
 
 
-
-def read_inventario():
+def read_inventario(inventario):
     '''
-    Leo el inventarios
+    Leo el inventario
 
     Returns:
-        DataFrame: Tabla de tecgnologias
+        Serie: Tabla de tecgnologias
     '''
-    tecnologias_monex = pd.read_excel(".//data//raw//tecnologias_monex.xlsx")
-    marcas_tecno = tecnologias_monex['Marca'].drop_duplicates().values
+    tecnologias_list = pd.read_excel(inventario)
+    marcas_tecno = tecnologias_list['Marca'].drop_duplicates().values
 
     return marcas_tecno
 
@@ -151,6 +151,7 @@ def buscar_en_inventario(data_cve, marcas):
     '''
     vuln_marcas =[] 
     for i in marcas:
+        # print(i)
         vuln_df = data_cve[data_cve['CPE'].str.contains(i, case = False, na= False)]
         vuln_marcas.append(vuln_df)
         
@@ -189,6 +190,14 @@ def load(listado_cve):
     Args:
         listado_cve (DataFrame):
     '''
+    # Crear la carpeta en donde se guarden los archivos descargados
+    ls = os.listdir()
+    if "reports" not in ls:
+        os.makedirs("reports")
+        print(f' se generó la siguiente carpeta {os.listdir()}')
+    else:
+        print("la carpeta ya existe")
+    
     listado_cve.to_csv('.//reports//vuln_high_critical.csv', index=False, encoding='utf-8-sig')
 
 
