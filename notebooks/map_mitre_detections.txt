@@ -1,12 +1,1 @@
-javascript:toggleblocksOC('57_Taxonomy Mappings');
-https://attack.mitre.org/wiki/Technique/T1040
-javascript:toggleblocksOC('612_Taxonomy Mappings');
-https://capec.mitre.org/data/definitions/292.html
-javascript:toggleblocksOC('613_Taxonomy Mappings');
-https://capec.mitre.org/data/definitions/292.html
-javascript:toggleblocksOC('615_Taxonomy Mappings');
-https://capec.mitre.org/data/definitions/616.html
-javascript:toggleblocksOC('662_Taxonomy Mappings');
-https://capec.mitre.org/data/definitions/94.html
-https://attack.mitre.org/wiki/Technique/T1185
-https://owasp.org/www-community/attacks/Man-in-the-browser_attack
+['https://attack.mitre.org/wiki/Technique/T1548']

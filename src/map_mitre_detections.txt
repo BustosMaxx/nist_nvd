@@ -1,0 +1,4 @@
+[['https://attack.mitre.org/wiki/Technique/T1036/003'], 'https://attack.mitre.org/wiki/Technique/T1001/002', 'https://attack.mitre.org/wiki/Technique/T1027/003', 'https://attack.mitre.org/wiki/Technique/T1027/004', 'https://attack.mitre.org/wiki/Technique/T1218/001', 'https://attack.mitre.org/wiki/Technique/T1221']
+https://attack.mitre.org/wiki/Technique/T1027/006
+https://attack.mitre.org/wiki/Technique/T1027/009
+https://attack.mitre.org/wiki/Technique/T1564/009
